@@ -1,0 +1,63 @@
+// Change class Main to class Solution 
+// passed first tests
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    
+    Scanner myObj = new Scanner(System.in);
+
+    int T = myObj.nextInt();
+    String[] toPrint = new String[T];
+
+    for (int t=0;t<T;t++) {
+      int N = myObj.nextInt();
+      int K = myObj.nextInt();
+      ArrayList<Integer> sessions = new ArrayList<Integer>();
+      for (int n=0; n<N; n++) {
+        sessions.add(myObj.nextInt());
+      }
+      for (int k=0; k<K; k++) {
+        int maxDiffIndex = maxDiff(sessions);
+        int maxDiffLength = sessions.get(maxDiffIndex) - sessions.get(maxDiffIndex-1);
+        if (maxDiffLength == 1) {
+          break;
+        } else {
+          int sessionLength = maxDiffLength/2 + sessions.get(maxDiffIndex-1);
+          sessions.add(maxDiffIndex, sessionLength);
+        }
+        
+      }
+      int maxDiffIndex = maxDiff(sessions);
+      int difficulty = (sessions.get(maxDiffIndex) - sessions.get(maxDiffIndex-1));
+      if (difficulty == 0) {
+        difficulty = 1;
+      }
+      toPrint[t] = ("Case #" + (t+1) + ": "  + difficulty);
+    }
+
+
+    for (String str:toPrint) {
+      System.out.println(str);
+    }
+    
+    
+  }
+  
+  // finds index of max difference (upper)
+  public static int maxDiff(ArrayList<Integer> sessions) {
+    int maxDiffIndex = sessions.size()-1;
+    for (int i=1;i<sessions.size();i++) {
+      int newDiff = sessions.get(i) - sessions.get(i-1);
+      int currentMaxDiff = sessions.get(maxDiffIndex) - sessions.get(maxDiffIndex-1);
+      if (newDiff>currentMaxDiff) {
+        maxDiffIndex = i;
+      }
+    }
+    return maxDiffIndex;
+
+  }
+
+
+
+}
