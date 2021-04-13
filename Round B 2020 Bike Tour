@@ -1,0 +1,37 @@
+// change class Main to class Solution 
+// passed both tests 
+// 30 minutes 
+
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+
+    Scanner input = new Scanner(System.in);
+    int numTestCases = input.nextInt();
+
+    // test cases start 
+    for (int t=0; t<numTestCases; t++) {
+      
+      // get heights 
+      int numPoints = input.nextInt();
+      int[] heights = new int[numPoints];
+      for (int n=0; n<numPoints; n++) {
+        heights[n] = input.nextInt();
+      }
+
+      // counting number of peaks 
+      int numPeaks = 0; 
+      for (int point=1; point<(numPoints-1); point++) {
+        if ((heights[point] > heights[point-1]) && (heights[point] > heights[point+1]) ) {
+          numPeaks++;
+        }
+      }
+
+      // display results!
+      System.out.printf("\nCase #%d: %d", (t+1), numPeaks);
+      
+    }
+    
+  }
+}
