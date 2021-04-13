@@ -1,0 +1,76 @@
+// Change class Main to class Solution 
+// Completed!
+
+import java.util.*;
+import java.lang.*;
+
+class Main {
+    public static void main(String[] args) {
+      Scanner myObj = new Scanner(System.in);
+      int T = myObj.nextInt(); // num test cases
+      
+      for (int t=0; t<T; t++) {
+          int N = myObj.nextInt(); // number of strings 
+          int K = myObj.nextInt(); // bundle into groups of size K
+          ArrayList<String> words = new ArrayList<String>();
+          myObj.nextLine(); // skip new line 
+          
+          for (int n=0; n<N; n++) {
+              words.add(myObj.nextLine());
+          }
+
+          // alphabetasise
+          Collections.sort(words);
+
+          int score = 0;
+          
+          // for each group 
+          for (int i=0; i<(N/K); i++) {
+            
+            ArrayList<String> wordGroup = new ArrayList<String>();
+            // for each word in each group 
+            for (int k=0; k<K; k++) {
+
+              wordGroup.add(words.get(0));
+              words.remove(0);
+                          
+            }
+            String pString = prefix(wordGroup);
+            wordGroup.clear();
+            score += pString.length();
+          }
+
+          
+          System.out.println("Case #" + (t+1) + ": " + score);
+      
+      }
+    
+    }
+        
+    // finds one prefix for an array of Strings 
+    public static String prefix(ArrayList<String> words) {
+        
+        // set to longest word that could be a prefix 
+        String pString = words.get(words.size()-1);
+        for (int i=0; i<pString.length()+1; i++) {
+          
+          int count = 0;
+          for (String word:words) {
+            if (word.startsWith(pString)) {
+              count++;
+            }
+          }
+          // if count says that all of the words have the prefix ... 
+          if (count == words.size()) {
+            return pString;
+          } else {
+            // decrease length of pString
+            pString = pString.substring(0, pString.length()-1);
+          }
+          
+        }
+        return "";
+        
+    }
+    
+}
