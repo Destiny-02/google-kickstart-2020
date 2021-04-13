@@ -1,5 +1,5 @@
 // Change class Main to class Solution 
-// passed first tests
+// passed first test, run time error for second
 import java.util.*;
 
 class Main {
