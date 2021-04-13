@@ -1,0 +1,45 @@
+// 1 hour
+// passed first test, run time error for second 
+// change class Main to class Solution 
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    int numTestCases = input.nextInt();
+
+    for (int t=0; t<numTestCases; t++) {
+      int numBuses = input.nextInt();
+      int day = input.nextInt();
+
+      // get bus route times 
+      ArrayList<Integer> buses = new ArrayList<Integer>(); 
+      for (int n=0; n<numBuses; n++) {
+        buses.add(input.nextInt());
+      }
+
+      // work backwards from last bus route 
+      for (int b=buses.size(); b>0; b--) {
+        day = findLatestDay(buses.get(b-1), day);
+      }
+
+      System.out.printf("\nCase #%d: %d", (t+1), day);
+      
+    }
+  }
+
+  // find highest common multiple that is less than day 
+  public static int findLatestDay(int bus, int day) {
+    int latestDay = bus;
+    for (int i=1; i<=(day/bus); i++) {
+      if (bus*i <= day) {
+        latestDay = bus*i;
+      }
+    }
+    //System.out.println("latest day: " + latestDay);
+    return latestDay;
+
+
+  }
+
+}
