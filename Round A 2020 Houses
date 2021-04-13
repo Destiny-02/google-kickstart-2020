@@ -1,0 +1,38 @@
+// Change class Main to class Solution 
+// Completed!
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner myObj = new Scanner(System.in);
+    int numTests = myObj.nextInt();
+    String[] toPrint = new String[numTests];
+    for (int i=0; i<numTests; i++) {
+
+      int numHouses = myObj.nextInt();
+      int money = myObj.nextInt();
+
+      int[] houses = new int[numHouses];
+
+      for (int j=0; j<numHouses; j++) {
+        houses[j] = myObj.nextInt();
+      }
+
+      Arrays.sort(houses);
+      int numBought = 0;
+      while (money >= 0) {
+        money -= houses[numBought];
+        numBought += 1;
+      }
+        numBought -=1; //undo last action
+
+      toPrint[i] = ("Case #" + (i+1) + ": " + numBought);
+      
+    }
+    for (String str:toPrint) {
+      System.out.println(str);
+    }
+  }
+}
