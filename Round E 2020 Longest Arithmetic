@@ -1,0 +1,38 @@
+// Complete!
+// change class Main to class Solution 
+
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    int numTestCases = input.nextInt();
+
+    for (int t=0; t<numTestCases; t++) {
+      int n = input.nextInt();
+      ArrayList<Integer> maxLengths = new ArrayList<Integer>();
+      int prev = input.nextInt();
+      int curr = -1;
+      int diff = -1;
+      int maxLength = 1;
+      
+      for (int i=1; i<n; i++) {
+        curr = input.nextInt();
+        if ((curr-prev) == diff) { // keep going 
+          //System.out.println("PREV: " + prev + "CURR: " + curr + " keep going");
+          maxLength++;
+        } else { // reset maxLength and diff
+          diff = (curr-prev);
+          maxLengths.add(maxLength);
+          maxLength = 2;
+        }
+        prev = curr;
+      }
+      maxLengths.add(maxLength);
+
+      System.out.printf("\nCase #%d: %d", (t+1), Collections.max(maxLengths));
+      
+    }
+  }
+
+}
