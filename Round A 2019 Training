@@ -1,0 +1,50 @@
+// Passed first test, TLE for second
+// change class Main to class Solution 
+
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    int numTestCases = input.nextInt();
+
+    for (int t=0; t<numTestCases; t++) {
+
+      // get data 
+      int numStudents = input.nextInt();
+      int teamSize = input.nextInt();
+      ArrayList<Integer> skillLevels = new ArrayList<Integer>();
+      for (int n=0;n<numStudents;n++) {
+        skillLevels.add(input.nextInt());
+      }
+
+      Collections.sort(skillLevels);
+      ArrayList<Integer> allHours = new ArrayList<Integer>();
+
+      // consider each team of length teamSize 
+      for (int t1=teamSize; t1<=numStudents; t1++) {
+        List<Integer> team = skillLevels.subList(t1-teamSize, t1);
+        int numHours = findHours(team);        
+        //System.out.println("\n TEAM: " + team.toString() + " HOURS: " + numHours);
+        allHours.add(numHours);
+      }
+
+      System.out.printf("\nCase #%d: %d", (t+1), Collections.min(allHours));
+      
+    }
+  }
+
+  public static int findHours(List<Integer> team) {
+    int level = Collections.max(team);
+    int numHours = 0;
+    for (int person : team) {
+
+      numHours += level - person;
+
+    }
+
+    return numHours;
+
+  }
+
+}
