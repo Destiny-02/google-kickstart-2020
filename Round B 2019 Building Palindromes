@@ -1,0 +1,85 @@
+// passed first test, TLE for second
+// change class Main to class Solution 
+// https://codingcompetitions.withgoogle.com/kickstart/round/0000000000050eda/0000000000119866
+
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+
+    Scanner input = new Scanner(System.in);
+    int numTestCases = input.nextInt();
+
+    for (int t=0; t<numTestCases; t++) {
+      int alphabetLength = input.nextInt();
+      int numQuestions = input.nextInt();
+      input.nextLine();
+      String alphabet = input.nextLine();
+      int count = 0;
+
+      // loop through each question set 
+      for (int n=0; n<numQuestions; n++) {
+
+        int low = input.nextInt();
+        int high = input.nextInt();
+        // check if makes a palindrome 
+        if (checkMakesPalindrome(alphabet.substring(low-1, high))) { 
+          count++;
+        }
+      }
+
+      System.out.printf("\nCase #%d: %d", (t+1), count);
+      
+    }
+
+    /*
+    System.out.println("word: " + checkMakesPalindrome("word"));
+    System.out.println("maam: " + checkMakesPalindrome("maam"));
+    System.out.println("racecar: " + checkMakesPalindrome("racecar"));
+    System.out.println("eeeee: " + checkMakesPalindrome("eeeee"));
+    */
+
+
+  }
+
+  public static boolean checkMakesPalindrome(String alphabet) {
+    // can generate a palindrome if there is an even number of every letter (even total number of letters)
+    // can generate a palindrome if there is an even number of every letter except one letter (odd total number of letters)
+
+    // convert to ArrayList<Character>
+
+    boolean makesPalindrome = true;
+
+    // convert to sorted array of sorted characters
+    char[] charArray = alphabet.toCharArray();
+    Arrays.sort(charArray); 
+    
+
+    if (charArray.length % 2 == 0) {
+      // check for even number of every letter
+      for (int c=0; c<charArray.length; c+=2) {
+        if (charArray[c] != charArray[c+1]) {
+          makesPalindrome = false;
+        }
+      }
+    } else {
+      // remove odd letter 
+      // check for even number of every letter 
+      int numOdd = 0;
+      for (int c=0; c<charArray.length-1; c+=2) {
+        if (charArray[c] != charArray[c+1]) {
+          if (numOdd >= 1) {
+            makesPalindrome = false;
+          }
+          numOdd += 1;
+          c--;
+        }
+
+      }
+    }
+
+
+    return makesPalindrome;
+  }
+
+}
