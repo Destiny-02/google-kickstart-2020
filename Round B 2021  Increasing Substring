@@ -1,0 +1,41 @@
+// Passed test 1, TLE for second 
+// change class Main to class Solution 
+
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    int numTestCases = input.nextInt();
+
+    for (int t=0; t<numTestCases; t++) {
+      
+      int prev = 1;
+      int strLength = input.nextInt();
+      input.nextLine();
+      String str = input.nextLine();
+      ArrayList<Integer> subLength = new ArrayList<Integer>();
+      subLength.add(prev);
+
+      for (int c=1; c<strLength; c++) {
+        if (str.charAt(c) > str.charAt(c-1)) {
+          prev ++;
+          subLength.add(prev);
+        } else {
+          prev = 1;
+          subLength.add(prev);
+        }
+      }
+
+      // create print string 
+      String printStr = "";
+      for (int n : subLength) {
+        printStr = printStr + " " + n;
+      }
+
+      System.out.printf("\nCase #%d: %s", (t+1), printStr);
+      
+    }
+  }
+
+}
