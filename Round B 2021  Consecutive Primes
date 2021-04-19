@@ -1,0 +1,46 @@
+// Passed test 1, TLE for second 
+// change class Main to class Solution 
+
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    int numTestCases = input.nextInt();
+    int solution = 0;
+
+    for (int t=0; t<numTestCases; t++) {
+      int num = input.nextInt();
+      ArrayList<Integer> primes = new ArrayList<Integer>();
+      for (int i=num; i>=2; i--) {
+        if (isPrime(i)) {
+          primes.add(i);
+        }
+      }
+      
+      for (int a : primes) {
+        int bIndex = primes.indexOf(a) + 1;
+        if (a * primes.get(bIndex) <= num) {
+          solution = a * primes.get(bIndex);
+          break;
+        }
+      }
+
+
+      System.out.printf("\nCase #%d: %d", (t+1), solution);
+      
+    }
+  }
+
+  public static boolean isPrime(int n) {
+    if (n <= 1)
+        return false;
+
+    for (int i = 2; i < n; i++)
+        if (n % i == 0)
+            return false;
+
+    return true;
+  }
+
+}
